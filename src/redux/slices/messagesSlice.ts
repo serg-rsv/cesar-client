@@ -1,16 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IMessage, IMessages } from '../../types/types';
 
-interface Message {
-  id: number;
-  text: string;
-  isDecrypted: boolean;
-}
-
-interface Messages {
-  messages: Message[];
-}
-
-const initialState: Messages = {
+const initialState: IMessages = {
   messages: [],
 };
 
@@ -18,13 +9,13 @@ export const messagesSlice = createSlice({
   name: 'messages',
   initialState,
   reducers: {
-    setMessages: (state, action: PayloadAction<Messages>) => {
+    setMessages: (state, action: PayloadAction<IMessages>) => {
       state.messages = action.payload.messages;
     },
-    addMessage: (state, action: PayloadAction<Message>) => {
+    addMessage: (state, action: PayloadAction<IMessage>) => {
       state.messages.push(action.payload);
     },
-    setCipheredMessage: (state, action: PayloadAction<Message>) => {
+    setCipheredMessage: (state, action: PayloadAction<IMessage>) => {
       state.messages = state.messages.map((message) => {
         if (message.id === action.payload.id) {
           return {

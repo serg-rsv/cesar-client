@@ -11,4 +11,6 @@ export const store = configureStore({
   reducer: rootReducer,
 });
 
+// store.dispatch(checkTokenValidity())
+
 export type RootState = ReturnType<typeof rootReducer>;
