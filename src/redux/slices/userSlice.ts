@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { IResponseToken } from 'types/types';
+
 interface IUserState {
   token: string | null;
   isLoggedIn: boolean;
@@ -14,33 +16,18 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    logIn: (state, action: PayloadAction<IUserState>) => {
-      state.token = action.payload.token;
-      localStorage.setItem('token', JSON.stringify(action.payload.token));
+    logIn: (state, action: PayloadAction<IResponseToken>) => {
+      state.token = action.payload.accessToken;
+      localStorage.setItem('token', JSON.stringify(action.payload.accessToken));
       state.isLoggedIn = true;
     },
     logOut: (state) => {
       state.token = null;
-      localStorage.setItem('token', JSON.stringify(null));
+      localStorage.removeItem('token');
       state.isLoggedIn = false;
     },
     // checkTokenValidity: (state) => {
-    //   const token = JSON.parse(localStorage.getItem('token'));
-    //   if (token) {
-    //     axios
-    //       .get('/api/check-token', {
-    //         headers: { Authorization: `Bearer ${token}` },
-    //       })
-    //       .then((response) => {
-    //         state.token = token;
-    //         state.isLoggedIn = true;
-    //       })
-    //       .catch((error) => {
-    //         localStorage.removeItem('token');
-    //         state.token = null;
-    //         state.isLoggedIn = false;
-    //       });
-    //   }
+    // Додати на бекенд ендпоінт для валідації токена
     // },
   },
 });

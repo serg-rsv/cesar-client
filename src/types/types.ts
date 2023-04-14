@@ -22,3 +22,7 @@ export interface IResponseMessage {
 export interface IResponseMessages {
   messages: IResponseMessage[];
 }
+
+export interface IResponseToken {
+  accessToken: string;
+}

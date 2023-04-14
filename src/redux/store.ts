@@ -1,6 +1,8 @@
+import { useDispatch } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { userReducer } from './slices/userSlice';
-import { messagesReducer } from './slices/messagesSlice';
+
+import { userReducer } from 'redux/slices/userSlice';
+import { messagesReducer } from 'redux/slices/messagesSlice';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -14,3 +16,6 @@ export const store = configureStore({
 // store.dispatch(checkTokenValidity())
 
 export type RootState = ReturnType<typeof rootReducer>;
+
+type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>();

@@ -1,5 +1,5 @@
-import { instance } from './configAxios';
-import { IResponseMessages } from '../types/types';
+import { instance } from 'api/configAxios';
+import { IResponseMessages } from 'types/types';
 
 export const getMessages = async (): Promise<IResponseMessages | undefined> => {
   try {
