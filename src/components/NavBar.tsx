@@ -1,30 +1,31 @@
 import { useSelector } from 'react-redux';
-import { AppBar, Toolbar, Typography, List, ListItem } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { AppBar, Toolbar, Typography, List } from '@mui/material';
 
-import { selectIsLoggedIn } from 'redux/selectors';
+import { selectEmail, selectIsLoggedIn } from 'redux/selectors';
+import NavItem from 'components/NavItem';
+import LogoutButton from 'components/LogoutButton';
 
-interface NavItem {
+export interface INavItem {
   label: string;
   to: string;
-  private: boolean;
+  private?: boolean;
+  restricted?: boolean;
 }
 
-const navItems: NavItem[] = [
+const navItems: INavItem[] = [
   {
     label: 'home',
     to: '/',
-    private: false,
   },
   {
     label: 'login',
     to: 'login',
-    private: false,
+    restricted: true,
   },
   {
     label: 'register',
     to: 'register',
-    private: false,
+    restricted: true,
   },
   {
     label: 'messages',
@@ -35,34 +36,59 @@ const navItems: NavItem[] = [
 
 const NavBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const email = useSelector(selectEmail);
 
   return (
-    <AppBar position="fixed">
-      <Toolbar>
-        <Typography
-          variant="h6"
+    <AppBar>
+      <Toolbar
+        sx={{
+          maxWidth: 'md',
+          width: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}
+      >
+        <Typography variant="h6">Cesar</Typography>
+        <List
           sx={{
             display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+            gap: 2,
+            marginLeft: 'auto',
+            marginRight: 'auto',
           }}
         >
-          Cesar
-        </Typography>
-        <List sx={{ display: 'flex', gap: 2 }}>
-          {navItems.map((navItem) => {
-            if (!navItem.private || isLoggedIn) {
-              return (
-                <ListItem key={navItem.to}>
-                  <NavLink to={navItem.to}>
-                    <Typography color="inherit">{navItem.label}</Typography>
-                  </NavLink>
-                </ListItem>
-              );
-            }
-            return null;
-          })}
+          {isLoggedIn
+            ? navItems.map((navItem) => {
+                if (navItem.restricted) {
+                  return null;
+                }
+                return (
+                  <NavItem
+                    key={navItem.label}
+                    to={navItem.to}
+                    label={navItem.label}
+                  />
+                );
+              })
+            : navItems.map((navItem) => {
+                if (navItem.private) {
+                  return null;
+                }
+                return (
+                  <NavItem
+                    key={navItem.label}
+                    to={navItem.to}
+                    label={navItem.label}
+                  />
+                );
+              })}
         </List>
+        {isLoggedIn && (
+          <>
+            <Typography>{email}</Typography>
+            <LogoutButton />
+          </>
+        )}
       </Toolbar>
     </AppBar>
   );

@@ -9,18 +9,15 @@ const AppView = () => {
     <>
       <NavBar />
       <Container
-        maxWidth="lg"
+        maxWidth="md"
         sx={{
-          pt: 6,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          minHeight: '100vh',
         }}
       >
         <Box
           sx={{
-            flexGrow: 1,
             width: '100%',
             padding: '24px',
             paddingTop: '64px',

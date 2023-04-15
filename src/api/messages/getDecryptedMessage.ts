@@ -5,10 +5,10 @@ export const getDecryptedMessage = async (
   messageId: number
 ): Promise<IResponseMessage | undefined> => {
   try {
-    const response = await instance.get<IResponseMessage>(
+    const { data } = await instance.get<IResponseMessage>(
       `/messages/${messageId}/decrypt`
     );
-    return response.data;
+    return data;
   } catch (error) {
     console.error('Cannot get decrypted message.', error);
   }

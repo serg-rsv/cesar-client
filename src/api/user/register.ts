@@ -1,5 +1,5 @@
 import { instance } from 'api/configAxios';
-import { IResponseToken } from 'types/types';
+import { IResponseAuth } from 'types/types';
 
 interface IUserAuth {
   email: string;
@@ -8,13 +8,13 @@ interface IUserAuth {
 
 export const register = async (
   userAuth: IUserAuth
-): Promise<IResponseToken | undefined> => {
+): Promise<IResponseAuth | undefined> => {
   try {
-    const response = await instance.post<IResponseToken>(
+    const { data } = await instance.post<IResponseAuth>(
       '/auth/register',
       userAuth
     );
-    return response.data;
+    return data;
   } catch (error) {
     console.error('Register error.', error);
   }

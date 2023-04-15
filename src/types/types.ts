@@ -9,13 +9,13 @@ export interface IMessages {
 }
 
 export interface INewMessage {
-  message: string;
+  text: string;
   type: 'cesar' | 'xor';
   key: number | string;
 }
 
 export interface IResponseMessage {
-  id: number;
+  id: string;
   text: string;
 }
 
@@ -23,6 +23,11 @@ export interface IResponseMessages {
   messages: IResponseMessage[];
 }
 
-export interface IResponseToken {
+export interface IResponseAuth {
   accessToken: string;
+  email: string;
+}
+
+export interface IResponseEmail {
+  email: string;
 }

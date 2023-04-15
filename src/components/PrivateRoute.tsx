@@ -4,13 +4,13 @@ import { Navigate } from 'react-router-dom';
 
 import { selectIsLoggedIn } from 'redux/selectors';
 
-interface PrivateRouteProps {
+interface IPrivateRouteProps {
   element: ReactNode;
 }
 
-const PrivateRoute = ({ element }: PrivateRouteProps) => {
+const PrivateRoute = ({ element }: IPrivateRouteProps) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  return isLoggedIn ? <>{element}</> : <Navigate to="/" />;
+  return <>{isLoggedIn ? element : <Navigate to="/" />}</>;
 };
 
 export default PrivateRoute;

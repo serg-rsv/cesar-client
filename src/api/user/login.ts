@@ -1,5 +1,5 @@
 import { instance } from 'api/configAxios';
-import { IResponseToken } from 'types/types';
+import { IResponseAuth } from 'types/types';
 
 interface IUserAuth {
   email: string;
@@ -8,9 +8,9 @@ interface IUserAuth {
 
 export const login = async (
   userAuth: IUserAuth
-): Promise<IResponseToken | undefined> => {
+): Promise<IResponseAuth | undefined> => {
   try {
-    const { data } = await instance.post<IResponseToken>(
+    const { data } = await instance.post<IResponseAuth>(
       '/auth/login',
       userAuth
     );
