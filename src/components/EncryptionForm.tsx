@@ -102,7 +102,12 @@ const EncryptionForm = ({ onSubmit, isLoading }: IEncryptionFormProps) => {
           </Select>
         </FormControl>
         {renderKeyInput()}
-        <Button type="submit" disabled={isLoading}>
+        <Button
+          type="submit"
+          variant="contained"
+          disabled={isLoading}
+          sx={{ height: '100%' }}
+        >
           Encrypt
         </Button>
       </Box>

@@ -18,7 +18,13 @@ interface IProps {
 
 const MessageItem = ({ isLoading, message, onEncrypt, onDecrypt }: IProps) => {
   return (
-    <ListItem>
+    <ListItem
+      sx={{
+        borderStyle: 'solid',
+        borderRadius: 1,
+        borderWidth: 1,
+      }}
+    >
       <ListItemText primary={message.text} />
       <ListItemSecondaryAction>
         <IconButton

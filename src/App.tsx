@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 import AppView from 'layout/AppView';
 import { HomePage } from 'pages/HomePage';
@@ -10,10 +11,25 @@ import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 import { checkToken } from 'api/user/checkToken';
 
-function App() {
+const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    checkToken();
+    checkToken().finally(() => setIsLoading(false));
   }, []);
+
+  if (isLoading) {
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="100vh"
+      >
+        Loading...
+      </Box>
+    );
+  }
 
   return (
     <Routes>
@@ -35,6 +51,6 @@ function App() {
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
-}
+};
 
 export default App;

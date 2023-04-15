@@ -60,7 +60,9 @@ export const MessagesPage = () => {
       <EncryptionForm onSubmit={handleAddMessage} isLoading={isLoading} />
       {messages.length > 0 && (
         <>
-          <Typography>Your messages</Typography>
+          <Typography variant="h6" mt={4} mb={2}>
+            Your messages
+          </Typography>
           <MessagesList messages={messages} />
         </>
       )}

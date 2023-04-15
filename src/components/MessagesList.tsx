@@ -30,7 +30,7 @@ const MessagesList = ({ messages }: IMessages) => {
   };
 
   return (
-    <List>
+    <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
       {messages.map((m: IMessage) => (
         <MessageItem
           key={m.id}

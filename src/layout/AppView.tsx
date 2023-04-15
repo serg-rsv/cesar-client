@@ -20,7 +20,8 @@ const AppView = () => {
           sx={{
             width: '100%',
             padding: '24px',
-            paddingTop: '64px',
+            mt: '64px',
+            mb: '64px',
             backgroundColor: '#fff',
             borderRadius: '8px',
           }}
